@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greenhouse Church · Focus Group Report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --dark:   #333333;
+  --text:   #f9f9e7;
+  --muted:  rgba(249,249,231,0.72);
+  --faint:  rgba(249,249,231,0.32);
+  --rule:   rgba(249,249,231,0.08);
+  --sage1:  #6b845f;
+  --sage2:  #9cb485;
+  --mint:   #dae7e2;
+  --mint2:  #b2d0c6;
+}
+
+body {
+  background: #222;
+  font-family: "DM Sans", sans-serif;
+  width: 1000px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ── GRADIENT CAP ── */
+.accent-bar {
+  height: 2px;
+  background: linear-gradient(90deg, var(--sage1) 0%, var(--sage2) 50%, var(--mint) 100%);
+}
+
+/* ── HEADER ── */
+.hdr {
+  background: var(--dark);
+  padding: 44px 52px 48px;
+}
+.hdr-eyebrow {
+  font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--sage2); margin-bottom: 14px;
+}
+.hdr-title {
+  font-size: 44px; font-weight: 700; color: #fff;
+  letter-spacing: -1.5px; line-height: 1; margin-bottom: 32px;
+}
+.hdr-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; border-top: 1px solid var(--rule);
+  padding-top: 24px; margin-bottom: 28px;
+}
+.hs-item {
+  padding-right: 28px;
+  border-right: 1px solid var(--rule);
+}
+.hs-item + .hs-item { padding-left: 28px; }
+.hs-item:last-child { border-right: none; }
+.hs-num {
+  font-size: 44px; font-weight: 700; color: var(--sage2);
+  line-height: 1; letter-spacing: -2px; display: block; margin-bottom: 6px;
+}
+.hs-label {
+  font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.5;
+  display: block;
+}
+.hdr-body {
+  font-size: 13.5px; font-weight: 300; color: var(--muted);
+  line-height: 1.8; border-top: 1px solid var(--rule); padding-top: 22px;
+}
+
+/* ── ACCORDION WRAPPER ── */
+.accordion-section {
+  background: var(--dark);
+  margin-top: 2px;
+}
+
+/* ── ACCORDION TRIGGER ── */
+.accordion-trigger {
+  width: 100%; background: none; border: none; cursor: pointer;
+  padding: 32px 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+.accordion-trigger::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--sage1), var(--sage2), var(--mint));
+  opacity: 0; transition: opacity 0.3s;
+}
+.accordion-trigger.open::before { opacity: 1; }
+.trigger-left { display: flex; align-items: center; gap: 18px; }
+.trigger-label {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--sage2); display: block; margin-bottom: 5px; text-align: left;
+}
+.trigger-title {
+  font-size: 28px; font-weight: 700; color: #fff;
+  letter-spacing: -0.5px; text-align: left;
+}
+.trigger-count {
+  font-size: 11px; font-weight: 300; color: var(--faint);
+  white-space: nowrap;
+}
+.trigger-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  border: 1px solid rgba(249,249,231,0.15); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.35s ease, background 0.3s;
+}
+.accordion-trigger.open .trigger-icon {
+  transform: rotate(180deg);
+  background: rgba(156,180,133,0.12);
+}
+.trigger-icon svg { display: block; }
+
+/* ── ACCORDION BODY ── */
+.accordion-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.accordion-body.open { max-height: 9000px; }
+
+/* ── ITEMS LIST ── */
+.items-list {
+  padding: 0 52px 40px;
+  display: flex; flex-direction: column; gap: 0;
+}
+
+/* ── INDIVIDUAL ITEM ── */
+.item {
+  border-bottom: 1px solid var(--rule);
+  padding: 28px 0;
+}
+.item:last-child { border-bottom: none; }
+.item-num {
+  font-size: 8.5px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--sage2); margin-bottom: 8px;
+}
+.item-title {
+  font-size: 20px; font-weight: 700; color: #fff;
+  letter-spacing: -0.3px; margin-bottom: 14px; line-height: 1.15;
+}
+.item-summary {
+  font-size: 13.5px; font-weight: 300; color: var(--muted);
+  line-height: 1.8; margin-bottom: 20px;
+  max-width: 820px;
+}
+.quotes-label {
+  font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 12px;
+}
+.quotes-list {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.quote-item {
+  padding: 14px 18px 14px 20px;
+  border-left: 2px solid var(--sage1);
+  background: rgba(107,132,95,0.06);
+}
+.quote-text {
+  font-size: 13px; font-style: italic; font-weight: 300;
+  color: rgba(249,249,231,0.82); line-height: 1.7;
+}
+</style>
+</head>
+<body>
+<style>
+.back-nav {
+  background: #2a2a2a;
+  padding: 14px 52px;
+  display: flex;
+  align-items: center;
+}
+.back-link {
+  display: inline-flex; align-items: center; gap: 9px;
+  text-decoration: none;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(156,180,133,0.8);
+  transition: color 0.2s;
+}
+.back-link:hover { color: #9cb485; }
+.back-link svg { flex-shrink: 0; transition: transform 0.2s; }
+.back-link:hover svg { transform: translateX(-3px); }
+</style>
+<div class="back-nav">
+  <a class="back-link" href="index.html">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M13 8H3M3 8L7 4M3 8L7 12" stroke="#9cb485" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Congregant Research
+  </a>
+</div>
+
+<div class="accent-bar"></div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-eyebrow">Greenhouse Church &nbsp;·&nbsp; Focus Group Report &nbsp;·&nbsp; December 2025</div>
+  <div class="hdr-title">Focus Group Overview</div>
+  <div class="hdr-stats">
+    <div class="hs-item">
+      <span class="hs-num">20</span>
+      <span class="hs-label">total participants across<br>two focus groups of 10</span>
+    </div>
+    <div class="hs-item">
+      <span class="hs-num">17</span>
+      <span class="hs-label">women participants &nbsp;·&nbsp; average age<br>late 30s, ranging early 20s to late 50s</span>
+    </div>
+    <div class="hs-item">
+      <span class="hs-num">2</span>
+      <span class="hs-label">balanced groups — half attending<br>&lt; 3 years, half 3+ years</span>
+    </div>
+  </div>
+  <div class="hdr-body">These conversations were designed to surface consistent themes around why people attend, what they value most, and where friction or gaps exist in their experience. Each group was intentionally balanced between newer and more established attendees to provide perspective across different stages of belonging.</div>
+</div>
+
+<!-- REASONS THEY ATTEND -->
+<div class="accordion-section">
+  <button class="accordion-trigger" id="btn-reasons" onclick="toggle('reasons')">
+    <div class="trigger-left">
+      <div>
+        <span class="trigger-label">Section 01</span>
+        <span class="trigger-title">Reasons They Attend</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span class="trigger-count">8 themes</span>
+      <div class="trigger-icon">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 5L7 10L12 5" stroke="#9cb485" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </button>
+
+  <div class="accordion-body" id="body-reasons">
+    <div class="items-list">
+
+      <div class="item">
+        <div class="item-num">Reason 01</div>
+        <div class="item-title">Kids &amp; Youth Ministries</div>
+        <div class="item-summary">Parents describe kids and youth ministry as one of the clearest reasons they remain engaged at Greenhouse. The value is not limited to childcare or programming. Congregants point to visible spiritual formation: children learning Scripture, talking about Jesus at home, enjoying church, and growing in their own walk with God. For parents, especially mothers, the strength of kids and youth ministry creates confidence that Greenhouse is not only serving adults on Sunday, but helping form their children in ways they can see and name.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"The thing that keeps me staying here is kids ministry... I think that children's ministry has really evolved since I got here."</div></div>
+          <div class="quote-item"><div class="quote-text">"My son said that he learns a lot about Jesus. And I noticed a few different things because he's always been insured. He started to bring in his Bible."</div></div>
+          <div class="quote-item"><div class="quote-text">"For me, having a place for my kids coming and having fun, but also growing in their walk, where my daughter's telling me what she's learning... it's actually changing them. That's huge for me as a mom because it's not every church."</div></div>
+          <div class="quote-item"><div class="quote-text">"They do a really good job of breaking the word down in a way that they understand it... they're very fun with it, but also teaching the word in a way that it sticks."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Reason 02</div>
+        <div class="item-title">Trust in Leadership &amp; Teaching Stability</div>
+        <div class="item-summary">Congregants describe trust in leadership as a major stabilizing factor. Their confidence is not rooted in predictability, personality, or agreement on every issue, but in the perception that teaching is consistently anchored in Scripture. That creates security for people who have been cautious or wounded in other church environments. Even when congregants are unsure where leadership will land, they express confidence that the direction will be shaped by the Bible rather than pressure, trend, or personal preference.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"He's not predictable. And the only way to predict what he's going to do or what side he's going to land on about any number of issues, in my opinion, is scripture."</div></div>
+          <div class="quote-item"><div class="quote-text">"In the rare circumstance where I am not sure about an issue, I tend to feel confident in his leadership in those areas, whereas in the past, with other pastors that I've been under, I'm very much like, wait, wait, pause."</div></div>
+          <div class="quote-item"><div class="quote-text">"Mike is preaching Bible. Matt, Byron, whomever goes up — they are preaching the life."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Reason 03</div>
+        <div class="item-title">Alignment with Vision, Theology, and Values</div>
+        <div class="item-summary">People are drawn to Greenhouse because the mission is repeated clearly and consistently. Congregants do not describe the church as merely offering services or programs. They describe a church with a defined theological and missional center: making disciples, giving people freedom to respond to their calling, and creating space for Spirit-led ministry without excessive control. The repetition of the mission builds confidence because people hear the same purpose reinforced often enough to believe the church is serious about it.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"I love the fact that the mission of the church is stated all the time. With any good organization, to repeat the mission over and over and over again — that's how people know that you're serious."</div></div>
+          <div class="quote-item"><div class="quote-text">"There's a freedom here to allow people to be who they are called to be... there's good leadership, but yet they're not controlled."</div></div>
+          <div class="quote-item"><div class="quote-text">"Just the mission of making disciples — it's just a passion of mine, to see people come to know Jesus. And I just love the fact that that mission is just repeated."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Reason 04</div>
+        <div class="item-title">Sunday Worship &amp; Teaching Experience</div>
+        <div class="item-summary">The Sunday experience matters because congregants encounter both spiritual depth and practical teaching. Worship is described as anointed, humble, and non-performative, while teaching is described as both theological and applicable. For some, the experience of the Holy Spirit was decisive in their decision to stay. The Sunday gathering is not only a weekly service for these congregants; it is the moment where they sense spiritual authenticity, receive direction, and feel sustained for the week ahead.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"This church has more talent, more anointing than that church ever had. The humility of the people and the desire to truly worship and not perform is so incredible."</div></div>
+          <div class="quote-item"><div class="quote-text">"It's difficult to marry theological information and the practical outcomes of it. Usually, you get one or the other. Mike makes people who've been a part of a church for a long time consider things differently."</div></div>
+          <div class="quote-item"><div class="quote-text">"When I came here, not wanting to come here, I felt the Holy Spirit speaking to me when I got here. So I knew I was gonna be here."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Reason 05</div>
+        <div class="item-title">Individual Leaders Who Care</div>
+        <div class="item-summary">Connection often happens because a specific person notices, pursues, and personally helps someone find a place. Congregants repeatedly describe breakthrough moments that were not produced by a system alone, but by an individual who saw confusion, absence, or disconnection and acted. These stories show that relational ownership at the individual level can change someone's entire experience of the church.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"I didn't know Janine. I was walking in the lobby one day... looking so confused that she came up to me and said, 'Well, what do you want?' That's how I got plugged in."</div></div>
+          <div class="quote-item"><div class="quote-text">"There are certain individuals who just came and scooped us up and said, 'You don't feel connected? How can we help you? Let me connect you here, let me connect you here.' Sometimes just one person will change someone's complete experience."</div></div>
+          <div class="quote-item"><div class="quote-text">"She reached out to me. The very first thing she said? 'Oh my God, it's so good to know that I was missed.' People don't want to be seen until they're missed."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Reason 06</div>
+        <div class="item-title">Missional Generosity</div>
+        <div class="item-summary">Greenhouse's approach to generosity builds trust because congregants experience it as non-manipulative and consistent. People appreciate that giving is not pressured, especially for first-time guests, which makes them more comfortable inviting others. The commitment to giving away a significant portion of resources also reinforces the belief that the church is acting from conviction rather than institutional self-protection.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"I've never heard, in my years here, 'you gotta give this' or 'we gonna take up extra money this Sunday.' Your first time here, don't even give. We don't want your money. This is what they say."</div></div>
+          <div class="quote-item"><div class="quote-text">"It makes me feel comfortable that I can bring someone I know — during the offering it's not going to be awkward."</div></div>
+          <div class="quote-item"><div class="quote-text">"Whatever it is, whatever the Lord said — 50% — then it's 50. And that's just it. I like that he's consistent with the fact that the Word's head."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Reason 07</div>
+        <div class="item-title">Healthier Than Past Churches</div>
+        <div class="item-summary">Several congregants compare Greenhouse favorably to prior church experiences. They describe it as healthier, more Spirit-led, less financially driven, and more diverse. These comparisons matter because many attendees are not evaluating Greenhouse in isolation. They are measuring it against previous church environments where they experienced rigidity, financial pressure, limited diversity, or lack of spiritual responsiveness.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"This church is much more healthier than the previous one."</div></div>
+          <div class="quote-item"><div class="quote-text">"I felt like the other churches had a lot of great qualities, but for me it was the spirit-led portion — the church was interruptible if they felt like God was speaking."</div></div>
+          <div class="quote-item"><div class="quote-text">"I came from a church where the emphasis has been finances first. Here, I've never heard that in my years here."</div></div>
+          <div class="quote-item"><div class="quote-text">"One Sunday when I came to Greenhouse, and look at the room — all different races. The kingdom of God. I think he has a difficult task, and I think he handles it very well."</div></div>
+          <div class="quote-item"><div class="quote-text">"It's not that we have everything perfect or agree 100%. But what I see is I love being with people who think different from me, and they teach me things I don't know."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Reason 08</div>
+        <div class="item-title">Hope That Things Will Improve</div>
+        <div class="item-summary">Even when congregants name real frustrations, many remain because they still carry hope. Some have stayed through years of disconnection because the teaching sustained them, the church's values mattered to them, or they finally began to experience relational breakthrough. This hope is fragile but important. It shows that people are not simply complaining; they want Greenhouse to become the kind of church they believe it can be.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"For nine years of not feeling connected — it just took so long. But I finally feel like with certain people in the church, I broke through. So now I'm on the other side."</div></div>
+          <div class="quote-item"><div class="quote-text">"Hearing the sermon was exactly what I needed at the time to sustain myself for the next week. It held out hope."</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEMS THEY FACE -->
+<div class="accordion-section" style="margin-top:2px;">
+  <button class="accordion-trigger" id="btn-problems" onclick="toggle('problems')">
+    <div class="trigger-left">
+      <div>
+        <span class="trigger-label">Section 02</span>
+        <span class="trigger-title">Problems They Face</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span class="trigger-count">7 themes</span>
+      <div class="trigger-icon">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 5L7 10L12 5" stroke="#9cb485" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </button>
+
+  <div class="accordion-body" id="body-problems">
+    <div class="items-list">
+
+      <div class="item">
+        <div class="item-num">Problem 01</div>
+        <div class="item-title">Difficulty Forming Real, Lasting Relationships</div>
+        <div class="item-summary">The clearest relational problem is not that people are unwilling to connect, but that connection is difficult to form and sustain. Congregants describe years of attending, meeting many people, and still struggling to find lasting relationships. The issue is especially significant because it affects both newer and long-time attendees. People can be present, serving, and even participating in microchurch while still feeling lonely.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"I've been here seven years, and we have met lots of people. There's one person I can think of in particular — she's been here 16 years. I just had lunch with her yesterday, and we still have the same conversation about how it's so hard to get connected."</div></div>
+          <div class="quote-item"><div class="quote-text">"Greenhouse is just too big, no one's reaching out to me. But I had to go and keep asking people and keep sending emails. If you're trying to get people plugged in, that's not gonna work for everyone."</div></div>
+          <div class="quote-item"><div class="quote-text">"I know people that are going to microchurch, but then you talk to them and they're lonely. They feel like 'I'm going to microchurch but I still don't feel connected throughout the week.' And then they think something's wrong with them."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Problem 02</div>
+        <div class="item-title">Communication Breakdowns</div>
+        <div class="item-summary">Communication gaps are experienced most sharply when important moments are missed by people who are already engaged. Congregants describe serving, attending regularly, and still missing critical transitions or opportunities. This creates a trust problem because the issue is not lack of interest from the congregation. It is that information is not reliably reaching the people who need it.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"Me being here every single Sunday, me serving a couple times a month — we were unaware of a vital, important part of going from 5th to 6th grade, which we call launch camp. There was no announcement made. It just slipped through the cracks."</div></div>
+          <div class="quote-item"><div class="quote-text">"The biggest misconception about communication is the delusion that it has taken place. They may say something somewhere, and because they said something somewhere, they think everybody heard it."</div></div>
+          <div class="quote-item"><div class="quote-text">"They have about 6,000 people calling this their home church. In the email system, I think there's about 900 emails."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Problem 03</div>
+        <div class="item-title">Microchurch Confusion &amp; Relational Disruption</div>
+        <div class="item-summary">Microchurch is intended to create community, but congregants describe moments where the structure disrupted the very relationships it was meant to protect. Multiplication, unclear closure, and changing group dynamics created sadness, hurt, and hesitation to try again. The most painful comments come from people who had finally found a place to belong and then experienced that connection being broken.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"Our first microchurch — we got so connected and it was so amazing, it was so life-giving. And then it started multiplying, multiplying, multiplying... my husband had finally found people he could be himself with. And when that was removed, it's been a year-long sadness to watch."</div></div>
+          <div class="quote-item"><div class="quote-text">"It took something that was really organic and made it too structured, where you lost this beautiful thing. People now that you could see blossoming kind of shut up to themselves and said, 'I don't want to do this again.'"</div></div>
+          <div class="quote-item"><div class="quote-text">"I tried and then was like, oh yes — and even those were more painful. One microchurch said they were going to close down, and then months later I found out they never closed. They just never told me."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Problem 04</div>
+        <div class="item-title">Over-Reliance on Microchurch as the Only Relational Path</div>
+        <div class="item-summary">Congregants do not reject microchurch. They question whether it can carry the full relational burden of the church by itself. Multiple comments point to a need for additional relational environments where people can meet outside their existing circles, especially through women's ministry, men's ministry, or broader gatherings. The concern is that when microchurch is the primary path, people who do not connect there have few other clear options.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"I think microchurches are great. I just think we put such an emphasis on microchurch here that there's some disconnect we're missing — for some reason it's not translating to people forming real, deep connection."</div></div>
+          <div class="quote-item"><div class="quote-text">"I don't think Activate is related to microchurch. After doing that, I still have to figure out what microchurch I need to join. And if you don't have that initiative, you just stop there."</div></div>
+          <div class="quote-item"><div class="quote-text">"I think they've had it many years ago — a women's ministry where once or twice a year it was open to women to actually meet people outside of your circle. Or a men's ministry where it's not just a microchurch, so you get to meet other men."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Problem 05</div>
+        <div class="item-title">Onboarding &amp; Next-Step Confusion</div>
+        <div class="item-summary">The next-step process requires more initiative than many people will naturally have. Congregants describe difficulty finding a microchurch, unclear information online, and a lack of differentiation between groups. The result is that motivated people may eventually find a place, but passive or overwhelmed people are likely to stop trying. The problem is not just information access; it is the lack of guided movement from interest to belonging.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"Trying to find a microchurch was difficult. The microchurch I'm in, I love — but I never would have picked it on my own. Even when my daughter and I were looking intently at the website, the information was just not there. You can't tell — there's nothing to differentiate any of them. Just names."</div></div>
+          <div class="quote-item"><div class="quote-text">"People who are more passive will just go to other churches. I think it takes so much intentionality — you have to search for it, and after one try you can't give up. But a lot of people aren't like that. They want people to come to them."</div></div>
+          <div class="quote-item"><div class="quote-text">"The average church attendee comes about once a month. Having a family come three consecutive weeks is very difficult when you have sports, family and commitments."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Problem 06</div>
+        <div class="item-title">Men's Engagement Lag</div>
+        <div class="item-summary">Men's engagement appears to lag behind women's engagement, especially in relational connection and ongoing participation. Congregants describe husbands who attend or serve, but remain minimally engaged or relationally disconnected. When men do find genuine connection, the loss of that connection is deeply felt. This suggests that men may need more intentional, lower-friction pathways into friendship, belonging, and ownership.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"How does your husband's engagement level compare to yours?" [Response:] "5% or 10% of what I do."</div></div>
+          <div class="quote-item"><div class="quote-text">"My husband is very introverted... he struggles with getting connected. He comes and serves and then... he's right there but not really engaged."</div></div>
+          <div class="quote-item"><div class="quote-text">"My husband had finally found people where he could be himself, not have to be all spiritual and tough like a church person. He was like, 'These people are different. This is a great group.' And then when that was removed, it's like it's been a year-long sadness."</div></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-num">Problem 07</div>
+        <div class="item-title">Staff &amp; Volunteer Burnout Concerns</div>
+        <div class="item-summary">Congregants are aware that Greenhouse is carrying a large vision with significant pressure on staff and volunteers. Their concern is not resistance to the mission, but fear that growth, generosity, and high ministry output may outpace the resources needed to sustain people well. Burnout is seen as a risk to staff health, volunteer joy, and the long-term ability of the church to continue its mission.</div>
+        <div class="quotes-label">Exact Quotes</div>
+        <div class="quotes-list">
+          <div class="quote-item"><div class="quote-text">"My fear at Greenhouse is there's so much to do. It's so task-oriented and not process-oriented. You do tasks, you don't have time — you just check it and go to the next thing. My fear is will it grow to the point that staff is too much, overwhelmed, and burnt out, and then it will flap."</div></div>
+          <div class="quote-item"><div class="quote-text">"I love that we give 50%. But I also want to make sure we don't give so much that our staff is not able to do things or we cannot grow. Then all missions stop."</div></div>
+          <div class="quote-item"><div class="quote-text">"On the worship team, we don't even have a worship director. We now have these groups of volunteers saying, 'Okay, we are filling the gap.' Which is an honor, but it is a lot for a huge church like this."</div></div>
+          <div class="quote-item"><div class="quote-text">"People were getting burnt out just from the sheer amount of things that we do. It was hard to find people to volunteer because people were like, 'No — I'm back here every week.' We need resources to come behind people so there's still joy in doing it."</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function toggle(id) {
+  const btn = document.getElementById('btn-' + id);
+  const body = document.getElementById('body-' + id);
+  const isOpen = body.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+</script>
+</body>
+</html>
